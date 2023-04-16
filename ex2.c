@@ -3,15 +3,21 @@
 
 int searching (int sym, int len_stb, int array[][len_stb], int len_str) {
 
+    int flag = 0; 
+
     for (int i = 0; i < len_str; i++) {
         for (int j = 0; j < len_stb; j++) {
             if (sym == array[i][j]) {
                 printf ("Stroka is %d\n" , i+1);
                 printf ("Stolbik is %d", j+1); 
+                flag = 1;
 
             }
         }
     }    
+    if (flag == 0) {
+        printf ("Sorry, your item is not there");
+    }
 
     return 0;
 } 
