@@ -4,7 +4,7 @@
 
 // Выбрала 2 вариант реализации (динамический массив)
 
- int print (int *array, int size) {
+int print (int *array, int size) {
     printf ("Ваш массив:\n");
     for (int i = 0; i < size; i++) {
         printf ("%d\n", *(array+i));
@@ -12,7 +12,6 @@
     printf ("\n");
     return 0;
 }
-
 
 int append (int *array, int size) {
     int new;
@@ -31,10 +30,26 @@ int append (int *array, int size) {
 
 int insert (int *array, int size) {
     int new;
+    int new_arr[size]; //массив для копирования старого массива
+    for (int j = 0; j < size; j++) {
+        new_arr[j] = *(array+j);
+    }
     array = realloc (array, sizeof(int) * (size+1));
     printf ("Введите, какое число вы хотите добавить в середину массива: ");
     scanf ("%d", &new);
-
+    printf ("Ваш массив: \n");
+    for (int i = size/2; i < (size+1); i++) {
+        if (i == size/2) {
+            *(array+i) = new;
+        }
+        else {
+            *(array+i) = new_arr[i-1];
+        }
+    }
+    for (int k = 0; k < (size+1); k++) {
+        printf("%d\n", array[k]);
+    }
+    return 0;
 }
 
 int main () {
@@ -63,9 +78,10 @@ int main () {
             append(array, size);
             size++;
         }
-/*        if (searching == 3) {
-            insert();
-        }*/
+        if (searching == 3) {
+            insert(array, size);
+            size++;
+        }
     } while (searching != 0); 
 
     return 0;
