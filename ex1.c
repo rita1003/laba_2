@@ -1,17 +1,6 @@
 #include <stdio.h> 
 
-int main() {
-    char sym;
-    char array[5] = {'H', 'e', 'l', 'l', 'o'};
-    int len = sizeof(array)/sizeof(array[0]); //длина массива 
-    printf ("Enter your symbol: \n");
-    scanf ("%d", &sym); 
-    printf ("%d", max_count (sym, array, len));
-
-    return 0;
-}
-
-int max_count(char sym, char array, int len) {
+int max_count(char sym, char array[], int len) {
     //как работает функция: 
     //имеется 2 переменные count_1 и count_2, равные 0. суть программы - вывод максимальной
     //последовательности. количество элементов последовательности записывается в count_1.
@@ -36,7 +25,7 @@ int max_count(char sym, char array, int len) {
                     count_2 = count_1;
                     count_1 = 0;
                 }
-                if (count_1 < count_2) {
+                if (count_1 <= count_2) {
                     count_1 = 0;
                 }
             }
@@ -45,3 +34,23 @@ int max_count(char sym, char array, int len) {
     }
     return count_2; 
 }
+
+int main() {
+    char sym;
+    char array[9] = {'h', 'e', 'l', 'l', 'o', 'l', 'l', 'l', '\0'};
+    int len = sizeof(array)/sizeof(array[0]); //длина массива 
+    printf ("Enter your symbol: \n");
+    scanf ("%c", &sym); 
+
+    int res = max_count (sym, array, len);
+
+    if (res == 0) {
+        printf ("Sorry, your symbol is not there");
+    }
+    else {
+        printf ("%d", res);
+    }
+
+    return 0;
+}
+
